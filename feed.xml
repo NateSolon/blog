@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://natesolon.github.io/fastpages/feed.xml" rel="self" type="application/atom+xml" /><link href="https://natesolon.github.io/fastpages/" rel="alternate" type="text/html" /><updated>2020-11-21T13:57:46-06:00</updated><id>https://natesolon.github.io/fastpages/feed.xml</id><title type="html">fastpages</title><subtitle>An easy to use blogging platform with support for Jupyter Notebooks.</subtitle><entry><title type="html">Chess Repertoire Explorer</title><link href="https://natesolon.github.io/fastpages/chess/data%20visualization/2020/11/21/Chess-Repertoire-Explorer.html" rel="alternate" type="text/html" title="Chess Repertoire Explorer" /><published>2020-11-21T00:00:00-06:00</published><updated>2020-11-21T00:00:00-06:00</updated><id>https://natesolon.github.io/fastpages/chess/data%20visualization/2020/11/21/Chess-Repertoire-Explorer</id><content type="html" xml:base="https://natesolon.github.io/fastpages/chess/data%20visualization/2020/11/21/Chess-Repertoire-Explorer.html">&lt;p&gt;In the hugely popular Netflix show Queen’s Gambit, the first book chess prodigy Beth Harmon receives from her mentor is MCO (Modern Chess Openings).&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://natesolon.github.io/fastpages/feed.xml" rel="self" type="application/atom+xml" /><link href="https://natesolon.github.io/fastpages/" rel="alternate" type="text/html" /><updated>2020-11-21T13:58:33-06:00</updated><id>https://natesolon.github.io/fastpages/feed.xml</id><title type="html">fastpages</title><subtitle>An easy to use blogging platform with support for Jupyter Notebooks.</subtitle><entry><title type="html">Chess Repertoire Explorer</title><link href="https://natesolon.github.io/fastpages/chess/data%20visualization/2020/11/21/Chess-Repertoire-Explorer.html" rel="alternate" type="text/html" title="Chess Repertoire Explorer" /><published>2020-11-21T00:00:00-06:00</published><updated>2020-11-21T00:00:00-06:00</updated><id>https://natesolon.github.io/fastpages/chess/data%20visualization/2020/11/21/Chess-Repertoire-Explorer</id><content type="html" xml:base="https://natesolon.github.io/fastpages/chess/data%20visualization/2020/11/21/Chess-Repertoire-Explorer.html">&lt;p&gt;In the hugely popular Netflix show Queen’s Gambit, the first book chess prodigy Beth Harmon receives from her mentor is MCO (Modern Chess Openings).&lt;/p&gt;
 
 &lt;p&gt;I don’t have my old copy of MCO - I must have lost or given it away - but I remember it well. A typical page looked like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;images/2020-11-21-Chess-Repertoire-Explorer/image5.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/2020-11-21-Chess-Repertoire-Explorer/image5.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;It was basically a giant catalog of opening variations: hundreds of pages, just like this. I think part of the appeal was the sense that something this dry and inscrutable must contain some really deep knowledge.&lt;/p&gt;
 
@@ -26,13 +26,13 @@
 
 &lt;p&gt;Part of the problem is that this format is too beholden to a traditional chess scoresheet. When you play a tournament chess game, you write down all the moves. This is what they’re writing down during the tournament games in Queen’s Gambit. The finished scoresheet looks like this.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;images/2020-11-21-Chess-Repertoire-Explorer/image2.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/2020-11-21-Chess-Repertoire-Explorer/image2.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Note that a scoresheet has a linear format: the moves go straight down the page in an unbroken sequence starting from move one. This is fine for a single game, but when we study chess, we’re concerned not just with what happened in one game, but what happened (or could happen) in many games. Thus, the structure of what we’re studying isn’t a line, but a series of branching paths.&lt;/p&gt;
 
 &lt;p&gt;This structure is called a tree and it’s very common in math and computer science. An early attempt at using a tree visualization for chess occurred in the famous book &lt;a href=&quot;https://books.google.com/books/about/Think_Like_a_Grandmaster.html?id=zXkSAAAACAAJ&quot;&gt;&lt;span class=&quot;underline&quot;&gt;Think Like a Grandmaster by Alexander Kotov&lt;/span&gt;&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;images/2020-11-21-Chess-Repertoire-Explorer/image3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/2020-11-21-Chess-Repertoire-Explorer/image3.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;This is a nice attempt to represent the tree-like structure of variations, but still suffers from some obvious problems. For example, it’s clearly not ideal for the text to be slanted at different angles, which contributes to the diagram being hard to read.&lt;/p&gt;
 
@@ -76,7 +76,7 @@
 
 &lt;p&gt;I wanted to create a way of visualizing your opening repertoire that would make it easy to answer these questions. The result was &lt;a href=&quot;https://chess-repertoire-explorer.herokuapp.com/&quot;&gt;&lt;span class=&quot;underline&quot;&gt;this app&lt;/span&gt;&lt;/a&gt;. It grabs your latest games from lichess and displays them in a way that makes it easy to see which openings occur the most often and how you’re doing in them.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;images/2020-11-21-Chess-Repertoire-Explorer/image1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/2020-11-21-Chess-Repertoire-Explorer/image1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;This kind of chart is known as a &lt;a href=&quot;https://en.wikipedia.org/wiki/Sankey_diagram&quot;&gt;&lt;span class=&quot;underline&quot;&gt;Sankey diagram&lt;/span&gt;&lt;/a&gt;. It’s used to visualize flows between various states, which are called nodes. In this case the nodes are positions and the flows are moves.&lt;/p&gt;
 
@@ -88,7 +88,7 @@
 
 &lt;p&gt;You can use the app to create this diagram for the last 100 blitz games of any player on &lt;a href=&quot;https://lichess.org/&quot;&gt;&lt;span class=&quot;underline&quot;&gt;lichess&lt;/span&gt;&lt;/a&gt;. For example, here’s the chart for world champion Magnus Carlsen (DrNykterstein on lichess):&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;images/2020-11-21-Chess-Repertoire-Explorer/image4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/2020-11-21-Chess-Repertoire-Explorer/image4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Unsurprisingly, Magnus is doing pretty well, but in this sample he’s not scoring as well with the English (1. c4) as with 1. e4 or 1. d4.&lt;/p&gt;
 
