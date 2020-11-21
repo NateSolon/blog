@@ -2,8 +2,8 @@
 title: "Chess Repertoire Explorer"
 description: "Using tree-based visualizations to understand your opening repertoire"
 layout: post
-toc: false
-comments: true
+toc: true
+comments: false
 image: /images/2020-11-21-Chess-Repertoire-Explorer/image4.png
 hide: false
 search_exclude: true
