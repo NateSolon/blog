@@ -56,17 +56,17 @@ Fortunately, these days things are a lot easier. Now that we have computers and 
 
 To test these ideas in practice, I made an app that helps you prioritize which openings to study by using a chart type called a Sankey diagram to visualize your repertoire. I’d argue that there are two factors you should think about when deciding which opening to focus on:
 
-1.  > How often the opening occurs in your games. Clearly, you don’t want to waste time on openings that hardly ever happen.
+1.  How often the opening occurs in your games. Clearly, you don’t want to waste time on openings that hardly ever happen.
 
-2.  > How well you score in the opening. It makes sense to pay special attention to the openings where you’re struggling.
+2.  How well you score in the opening. It makes sense to pay special attention to the openings where you’re struggling.
 
 So, which openings occur the most often in your games? And how do you score with your main openings?
 
 These questions aren’t that easy to answer with the existing tools. The best way I know of to do this in ChessBase is:
 
-1.  > Create a new database of the subset of games you’re interested in. For example, your white games from the past year.
+1.  Create a new database of the subset of games you’re interested in. For example, your white games from the past year.
 
-2.  > Select all the games in the database with Ctrl-A, then do Ctrl-Alt-Enter. (Good luck figuring that out from the documentation\!)
+2.  Select all the games in the database with Ctrl-A, then do Ctrl-Alt-Enter. (Good luck figuring that out from the documentation\!)
 
 This takes you to a view where you can go through your repertoire move-by-move and see how you’ve scored in each line. Useful, but the only way to access the information is to toggle through one move at a time; there’s no top-level summary to let you see what’s going on in the big picture.
 
