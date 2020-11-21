@@ -40,7 +40,7 @@ Looking at that page from MCO, it strikes me that the authors are struggling aga
 
 Part of the problem is that this format is too beholden to a traditional chess scoresheet. When you play a tournament chess game, you write down all the moves. This is what they’re writing down during the tournament games in Queen’s Gambit. The finished scoresheet looks like this.
 
-![](/images/2020-11-21-Chess-Repertoire-Explorer/image2.gif)
+![](/images/fastpages_posts/2020-11-21-Chess-Repertoire-Explorer/image2.gif)
 
 Note that a scoresheet has a linear format: the moves go straight down the page in an unbroken sequence starting from move one. This is fine for a single game, but when we study chess, we’re concerned not just with what happened in one game, but what happened (or could happen) in many games. Thus, the structure of what we’re studying isn’t a line, but a series of branching paths.
 
