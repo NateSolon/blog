@@ -2,7 +2,7 @@
 
 <p>I don’t have my old copy of MCO - I must have lost or given it away - but I remember it well. A typical page looked like this:</p>
 
-<p><img src="https://NateSolon.github.io/fastpages/assets/img/2020-11-20-Chess-Repertoire-Explorer/media/image5.png" alt="" /></p>
+<p><img src="https://NateSolon.github.io/fastpages/assets/img/2020-11-21-Chess-Repertoire-Explorer/media/image5.png" alt="" /></p>
 
 <p>It was basically a giant catalog of opening variations: hundreds of pages, just like this. I think part of the appeal was the sense that something this dry and inscrutable must contain some really deep knowledge.</p>
 
@@ -26,13 +26,13 @@
 
 <p>Part of the problem is that this format is too beholden to a traditional chess scoresheet. When you play a tournament chess game, you write down all the moves. This is what they’re writing down during the tournament games in Queen’s Gambit. The finished scoresheet looks like this.</p>
 
-<p><img src="https://NateSolon.github.io/fastpages/assets/img/2020-11-20-Chess-Repertoire-Explorer/media/image2.gif" alt="" /></p>
+<p><img src="https://NateSolon.github.io/fastpages/assets/img/2020-11-21-Chess-Repertoire-Explorer/media/image2.gif" alt="" /></p>
 
 <p>Note that a scoresheet has a linear format: the moves go straight down the page in an unbroken sequence starting from move one. This is fine for a single game, but when we study chess, we’re concerned not just with what happened in one game, but what happened (or could happen) in many games. Thus, the structure of what we’re studying isn’t a line, but a series of branching paths.</p>
 
 <p>This structure is called a tree and it’s very common in math and computer science. An early attempt at using a tree visualization for chess occurred in the famous book <a href="https://books.google.com/books/about/Think_Like_a_Grandmaster.html?id=zXkSAAAACAAJ"><span class="underline">Think Like a Grandmaster by Alexander Kotov</span></a>.</p>
 
-<p><img src="https://NateSolon.github.io/fastpages/assets/img/2020-11-20-Chess-Repertoire-Explorer/media/image3.png" alt="" /></p>
+<p><img src="https://NateSolon.github.io/fastpages/assets/img/2020-11-21-Chess-Repertoire-Explorer/media/image3.png" alt="" /></p>
 
 <p>This is a nice attempt to represent the tree-like structure of variations, but still suffers from some obvious problems. For example, it’s clearly not ideal for the text to be slanted at different angles, which contributes to the diagram being hard to read.</p>
 
@@ -76,7 +76,7 @@
 
 <p>I wanted to create a way of visualizing your opening repertoire that would make it easy to answer these questions. The result was <a href="https://chess-repertoire-explorer.herokuapp.com/"><span class="underline">this app</span></a>. It grabs your latest games from lichess and displays them in a way that makes it easy to see which openings occur the most often and how you’re doing in them.</p>
 
-<p><img src="https://NateSolon.github.io/fastpages/assets/img/2020-11-20-Chess-Repertoire-Explorer/media/image1.png" alt="" /></p>
+<p><img src="https://NateSolon.github.io/fastpages/assets/img/2020-11-21-Chess-Repertoire-Explorer/media/image1.png" alt="" /></p>
 
 <p>This kind of chart is known as a <a href="https://en.wikipedia.org/wiki/Sankey_diagram"><span class="underline">Sankey diagram</span></a>. It’s used to visualize flows between various states, which are called nodes. In this case the nodes are positions and the flows are moves.</p>
 
@@ -88,7 +88,7 @@
 
 <p>You can use the app to create this diagram for the last 100 blitz games of any player on <a href="https://lichess.org/"><span class="underline">lichess</span></a>. For example, here’s the chart for world champion Magnus Carlsen (DrNykterstein on lichess):</p>
 
-<p><img src="https://NateSolon.github.io/fastpages/assets/img/2020-11-20-Chess-Repertoire-Explorer/media/image4.png" alt="" /></p>
+<p><img src="https://NateSolon.github.io/fastpages/assets/img/2020-11-21-Chess-Repertoire-Explorer/media/image4.png" alt="" /></p>
 
 <p>Unsurprisingly, Magnus is doing pretty well, but in this sample he’s not scoring as well with the English (1. c4) as with 1. e4 or 1. d4.</p>
 
