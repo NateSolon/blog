@@ -6,7 +6,6 @@ toc: true
 comments: false
 image: images/diagram.png
 hide: false
-search_exclude: true
 categories: [chess, data visualization]
 ---
 
