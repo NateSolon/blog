@@ -17,7 +17,7 @@ In the hugely popular Netflix show Queen’s Gambit, the first book chess prodig
 
 I don’t have my old copy of MCO - I must have lost or given it away - but I remember it well. A typical page looked like this:
 
-![](/images/2020-11-21-Chess-Repertoire-Explorer/image5.png)
+![](/images/2020-11-21-Chess-Repertoire-Explorer/image5.png "Test")
 
 It was basically a giant catalog of opening variations: hundreds of pages, just like this. I think part of the appeal was the sense that something this dry and inscrutable must contain some really deep knowledge.
 
