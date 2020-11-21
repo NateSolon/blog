@@ -4,14 +4,14 @@ description: "Using tree-based visualizations to understand your opening reperto
 layout: post
 toc: true
 comments: false
-image: /images/2020-11-21-Chess-Repertoire-Explorer/image4.png
+image: images/2020-11-21-Chess-Repertoire-Explorer/image4.png
 hide: false
 search_exclude: true
 categories: [chess, data visualization]
-metadata_key1: metadata_value1
-metadata_key2: metadata_value2
 ---
 
+
+## MCO
 
 In the hugely popular Netflix show Queen’s Gambit, the first book chess prodigy Beth Harmon receives from her mentor is MCO (Modern Chess Openings).
 
