@@ -1,5 +1,5 @@
 ---
-title: "Poker Player to Data Scientists"
+title: "Poker Player to Data Scientist"
 description: "Lessons learned transitioning to data science from an unconventional background"
 layout: post
 toc: false
