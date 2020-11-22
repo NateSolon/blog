@@ -1,5 +1,5 @@
 ---
-title: "TEST1"
+title: "TEST2"
 description: "Using tree-based visualizations to understand your opening repertoire"
 layout: post
 toc: true
