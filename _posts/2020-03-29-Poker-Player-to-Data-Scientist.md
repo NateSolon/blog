@@ -5,7 +5,7 @@ layout: post
 toc: false
 comments: false
 hide: false
-permalink: /tree
+permalink: /poker-to-data-science
 categories: [poker, data science]
 ---
 

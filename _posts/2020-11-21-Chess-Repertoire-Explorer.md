@@ -6,6 +6,7 @@ toc: true
 comments: false
 image: images/fastpages_posts/2020-11-21-Chess-Repertoire-Explorer/image4.png
 hide: false
+permalink: /tree
 categories: [chess, data visualization]
 ---
 
