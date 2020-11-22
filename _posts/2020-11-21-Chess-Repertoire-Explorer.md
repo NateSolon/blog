@@ -1,5 +1,5 @@
 ---
-title: "Chess Repertoire Explorer"
+title: "TEST1"
 description: "Using tree-based visualizations to understand your opening repertoire"
 layout: post
 toc: true
