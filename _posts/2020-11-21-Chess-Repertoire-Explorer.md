@@ -4,7 +4,7 @@ description: "Using tree-based visualizations to understand your opening reperto
 layout: post
 toc: true
 comments: false
-image: {{ site.baseurl }}/images/2020-11-21-Chess-Repertoire-Explorer/image4.png
+# image: {{ site.baseurl }}/images/2020-11-21-Chess-Repertoire-Explorer/image4.png
 hide: false
 categories: [chess, data visualization]
 ---
@@ -16,7 +16,7 @@ In the hugely popular Netflix show Queen’s Gambit, the first book chess prodig
 
 I don’t have my old copy of MCO - I must have lost or given it away - but I remember it well. A typical page looked like this:
 
-![]({{ site.baseurl }}/images/fastpages_posts/2020-11-21-Chess-Repertoire-Explorer/image5.png "Test")
+![]({{ site.baseurl }}/images/fastpages_posts/2020-11-21-Chess-Repertoire-Explorer/image5.png)
 
 It was basically a giant catalog of opening variations: hundreds of pages, just like this. I think part of the appeal was the sense that something this dry and inscrutable must contain some really deep knowledge.
 
