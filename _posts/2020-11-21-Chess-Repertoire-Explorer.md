@@ -4,7 +4,7 @@ description: "Using tree-based visualizations to understand your opening reperto
 layout: post
 toc: true
 comments: false
-# image: {{ site.baseurl }}/images/2020-11-21-Chess-Repertoire-Explorer/image4.png
+image: images/fastpages_posts/2020-11-21-Chess-Repertoire-Explorer/image4.png
 hide: false
 categories: [chess, data visualization]
 ---
