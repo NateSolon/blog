@@ -1,10 +1,10 @@
 ---
-title: "TEST3"
+title: "Chess Repertoire Explorer"
 description: "Using tree-based visualizations to understand your opening repertoire"
 layout: post
 toc: true
 comments: false
-image: images/diagram.png
+image: {{ site.baseurl }}/images/2020-11-21-Chess-Repertoire-Explorer/image4.png
 hide: false
 categories: [chess, data visualization]
 ---
@@ -40,13 +40,13 @@ Looking at that page from MCO, it strikes me that the authors are struggling aga
 
 Part of the problem is that this format is too beholden to a traditional chess scoresheet. When you play a tournament chess game, you write down all the moves. This is what they’re writing down during the tournament games in Queen’s Gambit. The finished scoresheet looks like this.
 
-![](/images/fastpages_posts/2020-11-21-Chess-Repertoire-Explorer/image2.gif)
+![]({{ site.baseurl }}/images/fastpages_posts/2020-11-21-Chess-Repertoire-Explorer/image2.gif)
 
 Note that a scoresheet has a linear format: the moves go straight down the page in an unbroken sequence starting from move one. This is fine for a single game, but when we study chess, we’re concerned not just with what happened in one game, but what happened (or could happen) in many games. Thus, the structure of what we’re studying isn’t a line, but a series of branching paths.
 
 This structure is called a tree and it’s very common in math and computer science. An early attempt at using a tree visualization for chess occurred in the famous book [<span class="underline">Think Like a Grandmaster by Alexander Kotov</span>](https://books.google.com/books/about/Think_Like_a_Grandmaster.html?id=zXkSAAAACAAJ).
 
-![](/images/2020-11-21-Chess-Repertoire-Explorer/image3.png)
+![]({{ site.baseurl }}/images/2020-11-21-Chess-Repertoire-Explorer/image3.png)
 
 This is a nice attempt to represent the tree-like structure of variations, but still suffers from some obvious problems. For example, it’s clearly not ideal for the text to be slanted at different angles, which contributes to the diagram being hard to read.
 
@@ -72,7 +72,7 @@ This takes you to a view where you can go through your repertoire move-by-move a
 
 I wanted to create a way of visualizing your opening repertoire that would make it easy to answer these questions. The result was [<span class="underline">this app</span>](https://chess-repertoire-explorer.herokuapp.com/). It grabs your latest games from lichess and displays them in a way that makes it easy to see which openings occur the most often and how you’re doing in them.
 
-![](/images/2020-11-21-Chess-Repertoire-Explorer/image1.png)
+![]({{ site.baseurl }}/images/2020-11-21-Chess-Repertoire-Explorer/image1.png)
 
 This kind of chart is known as a [<span class="underline">Sankey diagram</span>](https://en.wikipedia.org/wiki/Sankey_diagram). It’s used to visualize flows between various states, which are called nodes. In this case the nodes are positions and the flows are moves.
 
@@ -84,7 +84,7 @@ Based on the prioritization system introduced at the beginning of this article, 
 
 You can use the app to create this diagram for the last 100 blitz games of any player on [<span class="underline">lichess</span>](https://lichess.org/). For example, here’s the chart for world champion Magnus Carlsen (DrNykterstein on lichess):
 
-![](/images/2020-11-21-Chess-Repertoire-Explorer/image4.png)
+![]({{ site.baseurl }}/images/2020-11-21-Chess-Repertoire-Explorer/image4.png)
 
 Unsurprisingly, Magnus is doing pretty well, but in this sample he’s not scoring as well with the English (1. c4) as with 1. e4 or 1. d4.
 
