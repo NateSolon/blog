@@ -54,7 +54,7 @@ Fortunately, these days things are a lot easier. Now that we have computers and 
 
 ## Using a Sankey diagram to visualize your repertoire
 
-To test these ideas in practice, I made an app that helps you prioritize which openings to study by using a chart type called a Sankey diagram to visualize your repertoire. I’d argue that there are two factors you should think about when deciding which opening to focus on:
+To test these ideas in practice, I made an [app](https://chess-repertoire-explorer.herokuapp.com/) that helps you prioritize which openings to study by using a chart type called a Sankey diagram to visualize your repertoire. I’d argue that there are two factors you should think about when deciding which opening to focus on:
 
 1.  How often the opening occurs in your games. Clearly, you don’t want to waste time on openings that hardly ever happen.
 
