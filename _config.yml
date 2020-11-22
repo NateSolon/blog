@@ -8,7 +8,7 @@
 
 title: Nate Solon's blog
 description: Data Science, ML, Chess, and Poker
-github_username: NateSolon
+github_username: natesolon
 # you can comment the below line out if your repo name is not different than your baseurl
 github_repo: "fastpages"
 
@@ -40,7 +40,7 @@ baseurl: "/fastpages" # the subpath of your site, e.g. "/blog".
 minima:
   social_links:
     twitter: natesolon
-    github: NateSolon
+    github: natesolon
 
 # Set this to true to get LaTeX math equation support
 use_math: 
