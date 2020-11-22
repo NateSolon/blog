@@ -1,1 +1,1 @@
-https://NateSolon.github.io/blog/
+https://natesolon.github.io/blog/
