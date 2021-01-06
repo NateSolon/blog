@@ -103,7 +103,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      4 min read
+      5 min read
     
 </span></p>
 
@@ -155,7 +155,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Suppose you're playing No Limit Hold'em, and based on how your opponent has played the hand, you believe they have pocket aces, pocket kings, or ace-king. How likely is each hand? (Hint: They're not equally likely!)</p>
-<p>The math that determines the likelihood of each hand is called combinatorics and it's in a sweet spot of being non-obvious, yet pretty easy to understand, and highly relevant for in-game strategy. I just finished <a href="https://learning.oreilly.com/library/view/fluent-python/9781491946237/">Fluent Python</a> by Luciano Ramalho and got a refresher on the <a href="https://docs.python.org/3/library/itertools.html">Python built-in itertools module</a>. It's the perfect way to explore poker combinations.</p>
+<p>The math that determines the likelihood of each hand is called combinatorics and it's in a sweet spot of being non-obvious, yet pretty easy to understand, and highly relevant for in-game strategy. I just finished <a href="https://learning.oreilly.com/library/view/fluent-python/9781491946237/">Fluent Python</a> by Luciano Ramalho and got a refresher on the <a href="https://docs.python.org/3/library/itertools.html">Python built-in itertools module</a>, which provides the necessary tools to explore combinatorics. Itertools provides functions for creating iterators. Of particular interest for poker are the "combinatoric iterators," such as <code>product</code> and <code>combinations</code>, which combine elements together. These will be useful for combining ranks and suits to form cards, combining cards to form combinations, and ultimately understanding the relative likelihood of different hands.</p>
 <p>By the way, you can run this post as a colab notebook. Click the colab link under the title to open a notebook in colab where you can run the code or try your own changes.</p>
 
 </div>
@@ -168,7 +168,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">itertools</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span><span class="p">,</span> <span class="n">combinations</span><span class="p">,</span> <span class="n">filterfalse</span>
 </pre></div>
 
     </div>
@@ -207,6 +207,7 @@ window.onload = wrap_img;
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>To get the cards in the deck, you can use the <code>product</code> function from itertools. Here's the description:</p>
 <p>"Cartesian product: yields N-tuples made by combining items from each input iterable like nested for loops could produce."</p>
+<p>Essentially, this gets every combination of suits and ranks.</p>
 
 </div>
 </div>
@@ -218,7 +219,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cards</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">ranks</span><span class="p">,</span> <span class="n">suits</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cards</span> <span class="o">=</span> <span class="n">product</span><span class="p">(</span><span class="n">ranks</span><span class="p">,</span> <span class="n">suits</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -242,7 +243,8 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">cards</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cards</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">cards</span><span class="p">)</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">cards</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -304,7 +306,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Story checks out!</p>
-<p>Now, combinations (or combos) are all the ways you can deal a two-card starting hand. Conveniently, itertools has a <code>combinations</code> function.</p>
+<p>Now, combinations (or combos) are all the possible two-card starting hands. Conveniently, itertools has a <code>combinations</code> function. It takes two arguments: the set you'll be drawing from, and the size of the combinations. In this case you want all two-card combinations from cards. It generates combinations without replacement, i.e., you can't draw the same card twice.</p>
 
 </div>
 </div>
@@ -316,7 +318,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">combos</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">cards</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">combos</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="n">cards</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -434,9 +436,9 @@ window.onload = wrap_img;
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Even though the above hands have different cards, you'd probably think of both of them as "pocket deuces." If you play a lot of poker, you've likely seen "The Grid," which is a more intuitive way of representing hands.</p>
+<p>Even though the above hands have different cards, you'd probably think of both of them as "pocket deuces." If you play a lot of poker, you've likely seen the "Grid," which is a more intuitive way of representing hands.</p>
 <p><img src="https://raw.githubusercontent.com/NateSolon/blog/master/images/poker_grid.png" alt="" /></p>
-<p>In this way of representing the hands, the upper right hands are suited, the lower left are offsuit, and the pairs go diagonally across the middle. To get something more like the grid representation of hands, you can take the product of ranks with itself.</p>
+<p>In this way of representing the hands, the upper right hands are suited, the lower left are offsuit, and the pairs go diagonally across the middle. Each cell represents multiple combinations (but not always the same number of combinations per cell!). To get something more like the grid representation of hands, you can take the product of ranks with itself.</p>
 
 </div>
 </div>
@@ -448,7 +450,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hands</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">ranks</span><span class="p">,</span> <span class="n">ranks</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hands</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">product</span><span class="p">(</span><span class="n">ranks</span><span class="p">,</span> <span class="n">ranks</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -589,44 +591,11 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">AA</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">aces</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-<span class="n">KK</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">kings</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">AA</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="n">aces</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">KK</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="n">kings</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-</div>
-    
-
-    
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">AA</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>6</pre>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -661,6 +630,39 @@ window.onload = wrap_img;
  ((&#39;A&#39;, &#39;hearts&#39;), (&#39;A&#39;, &#39;diamonds&#39;)),
  ((&#39;A&#39;, &#39;hearts&#39;), (&#39;A&#39;, &#39;clubs&#39;)),
  ((&#39;A&#39;, &#39;diamonds&#39;), (&#39;A&#39;, &#39;clubs&#39;))]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">AA</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>6</pre>
 </div>
 
 </div>
@@ -713,7 +715,7 @@ window.onload = wrap_img;
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>You get dealt pocket aces about one in 200 hands.</p>
+<p>You get dealt pocket aces about one in 200 hands. How does this compare to ace-king?</p>
 
 </div>
 </div>
@@ -725,10 +727,58 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">AK</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">aces</span><span class="p">,</span> <span class="n">kings</span><span class="p">))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">AK</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">product</span><span class="p">(</span><span class="n">aces</span><span class="p">,</span> <span class="n">kings</span><span class="p">))</span>
 </pre></div>
 
     </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">AK</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[((&#39;A&#39;, &#39;spades&#39;), (&#39;K&#39;, &#39;spades&#39;)),
+ ((&#39;A&#39;, &#39;spades&#39;), (&#39;K&#39;, &#39;hearts&#39;)),
+ ((&#39;A&#39;, &#39;spades&#39;), (&#39;K&#39;, &#39;diamonds&#39;)),
+ ((&#39;A&#39;, &#39;spades&#39;), (&#39;K&#39;, &#39;clubs&#39;)),
+ ((&#39;A&#39;, &#39;hearts&#39;), (&#39;K&#39;, &#39;spades&#39;)),
+ ((&#39;A&#39;, &#39;hearts&#39;), (&#39;K&#39;, &#39;hearts&#39;)),
+ ((&#39;A&#39;, &#39;hearts&#39;), (&#39;K&#39;, &#39;diamonds&#39;)),
+ ((&#39;A&#39;, &#39;hearts&#39;), (&#39;K&#39;, &#39;clubs&#39;)),
+ ((&#39;A&#39;, &#39;diamonds&#39;), (&#39;K&#39;, &#39;spades&#39;)),
+ ((&#39;A&#39;, &#39;diamonds&#39;), (&#39;K&#39;, &#39;hearts&#39;)),
+ ((&#39;A&#39;, &#39;diamonds&#39;), (&#39;K&#39;, &#39;diamonds&#39;)),
+ ((&#39;A&#39;, &#39;diamonds&#39;), (&#39;K&#39;, &#39;clubs&#39;)),
+ ((&#39;A&#39;, &#39;clubs&#39;), (&#39;K&#39;, &#39;spades&#39;)),
+ ((&#39;A&#39;, &#39;clubs&#39;), (&#39;K&#39;, &#39;hearts&#39;)),
+ ((&#39;A&#39;, &#39;clubs&#39;), (&#39;K&#39;, &#39;diamonds&#39;)),
+ ((&#39;A&#39;, &#39;clubs&#39;), (&#39;K&#39;, &#39;clubs&#39;))]</pre>
+</div>
+
+</div>
+
 </div>
 </div>
 
@@ -770,7 +820,7 @@ window.onload = wrap_img;
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>There are 16 combinations of AK. Of those, some are suited and some are offsuit.</p>
+<p>There are 16 combinations of AK. Of those, some are suited and some are offsuit. You can use the <code>filter</code> and <code>filterfalse</code> functions to separate them.</p>
 
 </div>
 </div>
@@ -782,8 +832,26 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">AKs</span> <span class="o">=</span> <span class="p">[</span><span class="n">h</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">AK</span> <span class="k">if</span> <span class="n">h</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">h</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]]</span>
-<span class="n">AKo</span> <span class="o">=</span> <span class="p">[</span><span class="n">h</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">AK</span> <span class="k">if</span> <span class="n">h</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">h</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]]</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">suited</span><span class="p">(</span><span class="n">hand</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">hand</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">hand</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">AKs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="n">suited</span><span class="p">,</span> <span class="n">AK</span><span class="p">))</span>
+<span class="n">AKo</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">filterfalse</span><span class="p">(</span><span class="n">suited</span><span class="p">,</span> <span class="n">AK</span><span class="p">))</span>
 </pre></div>
 
     </div>
