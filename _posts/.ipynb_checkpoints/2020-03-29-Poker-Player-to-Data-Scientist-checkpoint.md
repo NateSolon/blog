@@ -6,7 +6,6 @@ toc: false
 comments: false
 hide: false
 permalink: /poker-to-data-science
-google_analytics: G-JKKPPWC8NP
 categories: [poker, data science]
 ---
 
