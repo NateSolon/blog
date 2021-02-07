@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Poker Combinatorics with Itertools: Part 2 | Nate Solon’s blog</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Poker Combinatorics with Itertools: Part 2" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Ranges and Equity" />
+<meta property="og:description" content="Ranges and Equity" />
+<link rel="canonical" href="https://natesolon.github.io/blog/combos-part-2" />
+<meta property="og:url" content="https://natesolon.github.io/blog/combos-part-2" />
+<meta property="og:site_name" content="Nate Solon’s blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-02-07T00:00:00-06:00" />
+<script type="application/ld+json">
+{"headline":"Poker Combinatorics with Itertools: Part 2","dateModified":"2021-02-07T00:00:00-06:00","datePublished":"2021-02-07T00:00:00-06:00","description":"Ranges and Equity","mainEntityOfPage":{"@type":"WebPage","@id":"https://natesolon.github.io/blog/combos-part-2"},"@type":"BlogPosting","url":"https://natesolon.github.io/blog/combos-part-2","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://natesolon.github.io/blog/feed.xml" title="Nate Solon's blog" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','G-JKKPPWC8NP','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+<link rel="shortcut icon" type="image/x-icon" href="/blog/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Poker Combinatorics with Itertools: Part 2 | Nate Solon’s blog</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Poker Combinatorics with Itertools: Part 2" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Ranges and Equity" />
+<meta property="og:description" content="Ranges and Equity" />
+<link rel="canonical" href="https://natesolon.github.io/blog/combos-part-2" />
+<meta property="og:url" content="https://natesolon.github.io/blog/combos-part-2" />
+<meta property="og:site_name" content="Nate Solon’s blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-02-07T00:00:00-06:00" />
+<script type="application/ld+json">
+{"headline":"Poker Combinatorics with Itertools: Part 2","dateModified":"2021-02-07T00:00:00-06:00","datePublished":"2021-02-07T00:00:00-06:00","description":"Ranges and Equity","mainEntityOfPage":{"@type":"WebPage","@id":"https://natesolon.github.io/blog/combos-part-2"},"@type":"BlogPosting","url":"https://natesolon.github.io/blog/combos-part-2","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://natesolon.github.io/blog/feed.xml" title="Nate Solon's blog" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','G-JKKPPWC8NP','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/blog/">Nate Solon&#39;s blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/blog/about/">About Me</a><a class="page-link" href="/blog/search/">Search</a><a class="page-link" href="/blog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Poker Combinatorics with Itertools: Part 2</h1><p class="page-description">Ranges and Equity</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-02-07T00:00:00-06:00" itemprop="datePublished">
+        Feb 7, 2021
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      5 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/blog/categories/#poker">poker</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/blog/categories/#python">python</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/natesolon/fastpages/tree/master/_notebooks/2021-02-07-Poker-Math-with_Itertools-2.ipynb" role="button">
+<img class="notebook-badge-image" src="/blog/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div><div class="px-2">
+    <a href="https://colab.research.google.com/github/natesolon/fastpages/blob/master/_notebooks/2021-02-07-Poker-Math-with_Itertools-2.ipynb">
+        <img class="notebook-badge-image" src="/blog/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2021-02-07-Poker-Math-with_Itertools-2.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In <a href="https://natesolon.github.io/blog/combos">Part 1</a> of this series we used the itertools module to explore poker combinatorics: the number of ways each hand can be dealt, which determines the relative likelihood of different hands. In Part 2, we'll expand on combinatorics to understand how well our hand does against our opponent's likely holdings.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span><span class="p">,</span> <span class="n">filterfalse</span><span class="p">,</span> <span class="n">product</span><span class="p">,</span> <span class="n">starmap</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We were considering a hypothetial scenario where you hold pocket deuces and you believe your opponent has either pocket aces, pocket kings, or ace-king. In poker terminology, the list of all the hands you think someone could have based on their actions is called a <strong>range</strong>. So in this case, your opponent's range is [AA, KK, AK]. Normally it's not possible to narrow down someone's range to just a few hands - this is a simplified example for illustration.</p>
+<p>To put a finer point on it, let's say the following action has taken place. You're playing 1-2 No Limit Hold-em. Your opponent raised to 10, you re-raised to 30, and they went all-in for 100. Should you call or fold?</p>
+<p>The code below computes the number of combinations of pocket aces, pocket kings, ace-king suited, and ace-king offsuit respectively. For an explanation of how the code works, see <a href="https://natesolon.github.io/blog/combos">Part 1</a>.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">suits</span> <span class="o">=</span> <span class="s1">&#39;spades hearts diamonds clubs&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+
+<span class="n">aces</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">suits</span><span class="p">]</span>
+<span class="n">kings</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">suits</span><span class="p">]</span>
+
+<span class="n">AA</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="n">aces</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">KK</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">combinations</span><span class="p">(</span><span class="n">kings</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="n">AK</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">product</span><span class="p">(</span><span class="n">aces</span><span class="p">,</span> <span class="n">kings</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">suited</span><span class="p">(</span><span class="n">hand</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">hand</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">hand</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">AKs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="n">suited</span><span class="p">,</span> <span class="n">AK</span><span class="p">))</span>
+<span class="n">AKo</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">filterfalse</span><span class="p">(</span><span class="n">suited</span><span class="p">,</span> <span class="n">AK</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">combos</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="nb">len</span><span class="p">(</span><span class="n">AA</span><span class="p">),</span>
+    <span class="nb">len</span><span class="p">(</span><span class="n">KK</span><span class="p">),</span>
+    <span class="nb">len</span><span class="p">(</span><span class="n">AKs</span><span class="p">),</span>
+    <span class="nb">len</span><span class="p">(</span><span class="n">AKo</span><span class="p">)</span>
+<span class="p">]</span>
+<span class="n">combos</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[6, 6, 4, 12]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We left off Part 1 with the possibly surprising observation that given two facts...</p>
+<ul>
+<li>There are 6 combos each of pocket aces and pocket kings, compared to 16 total combos of ace-king</li>
+<li>Pocket deuces is a favorite against ace-king</li>
+</ul>
+<p>...you are actually a favorite more often than not in this scenario. That seems encouraging! However, you are either <em>slightly</em> ahead or <em>way</em> behind, which might put a damper on your enthusiasm.</p>
+<p>Let's try to quantify this. To do so, you'll need to know your chances of winning against each hand in your opponent's range. In poker, this number is called <strong>equity</strong>. Calculating the equities is outside the scope of this notebook, but you can look them up with a <a href="http://propokertools.com/simulations">poker equity calculator</a>. Here's the equity of your hand, 22, against each hand in your opponent's range:</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">equities</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="mf">17.78</span><span class="p">,</span> <span class="c1"># AA</span>
+    <span class="mf">18.19</span><span class="p">,</span> <span class="c1"># KK</span>
+    <span class="mf">50.11</span><span class="p">,</span> <span class="c1"># AKs</span>
+    <span class="mf">52.65</span><span class="p">,</span> <span class="c1"># AKo</span>
+<span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A quick aside on equity: Analytical-minded people who don't play a lot of poker often ask some version of the question, "Isn't poker just math?" By math, I think they usually mean something like equity. Basically, how often would your hand win if you just dealt out the rest of the cards. This does seem extremely relevant, so why isn't it the whole story? Well, if you or your opponent is all-in, it is nearly the whole story. But if you're not all-in, you don't just deal out the cards and see who wins. You engage in a series of strategic interactions where you and your opponent try to outmaneuver each other. In this struggle, hands can perform better or worse than their equity would suggest. This part of poker is described by an entirely different branch of math: game theory.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Anyway, back to the situation at hand. When deciding whether to call or fold, what really matters is your equity against your opponent's range. This is the average of your equity against each hand in their range, weighted by the number of combinations. (Remember, combinations determine the relative likelihood of the hands.)</p>
+<p>To calculate that you can use another function from the itertools module, <code>starmap</code>, which applies a function to each item of an iterable. In this case, to get the equity against their range, for each hand you can multiply the number of combos by your equity against that hand, and finally divide by the total number of combos to get the weighted average.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">equity_vs_range</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">starmap</span><span class="p">(</span><span class="n">operator</span><span class="o">.</span><span class="n">mul</span><span class="p">,</span> <span class="nb">zip</span><span class="p">(</span><span class="n">combos</span><span class="p">,</span> <span class="n">equities</span><span class="p">)))</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">combos</span><span class="p">)</span>
+<span class="n">equity_vs_range</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>37.43071428571428</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>So it turns out that even though you're a favorite more often than not, you only have 37% equity against their range. Not great. So you should fold, right?</p>
+<p>The thing is, there's already a lot of money in the pot. There's the blinds of 1 and 2, plus your raise to 30, and finally your opponent's 100. You only have to call another 70 to have a chance of winning all of that.</p>
+<p>In poker, maximizing expected value is the name of the game. By definition, the expected value of folding is zero. If you fold, you can neither win nor lose any more money. So, you should call if the expected value of calling is greater than zero. The expected value of the call is -70 (what you need to invest to call) plus what you stand to win, which is your equity against your opponent's range times the size of the final pot.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span>
+    <span class="o">-</span><span class="mi">70</span> <span class="c1"># what it costs to call</span>
+    <span class="o">+</span> <span class="n">equity_vs_range</span> <span class="o">/</span> <span class="mi">100</span> <span class="c1"># your equity vs. their range (divide by 100 because it&#39;s a percent)</span>
+    <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">100</span> <span class="o">+</span> <span class="mi">100</span><span class="p">)</span> <span class="c1"># final size of the pot</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>5.984349999999978</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Even though you only have 37% equity against your opponent's range, you stand to make 6 dollars by calling because there's already so much money in the pot. Admittedly, this isn't a great spot for you - on average you'll finish the hand with less money than you started with - but maybe you should have thought of that before raising to 30.</p>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><a class="u-url" href="/blog/combos-part-2" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/blog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/blog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Data Science, ML, Chess, and Poker</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/natesolon" title="natesolon"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/natesolon" title="natesolon"><svg class="svg-icon grey"><use xlink:href="/blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
