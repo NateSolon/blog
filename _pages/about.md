@@ -4,9 +4,7 @@ title: About Me
 permalink: /about/
 ---
 
-Data scientist at [Reserved.ai](https://www.reserved.ai/).
-
-Former poker pro and chess master.
+Chess master, former poker pro, current data scientist.
 
 Interested in data, learning, and games.
 
